@@ -1,3 +1,19 @@
+function getPlaces(amenities) {
+  // Gets places by amenities
+  $.ajax({
+    type: "POST",
+    url: "http://localhost:5001/api/v1/places_search/",
+    data: JSON.stringify(amenities),
+    dataType: "json",
+    contentType: "application/json",
+    success: (data) => {
+      data.forEach(place => {
+        $('.places').append(`<article><div class="title_box"><h2>${place.name}</h2><div class="price_by_night">$${place.price_by_night}</div></div><div class="information"><div class="max_guest">${place.max_guest} Guests</div><div class="number_rooms">${place.number_rooms} Bedrooms</div><div class="number_bathrooms">${place.number_bathrooms} Bathrooms</div></div><div class="description">$${place.description}</div></article>`);
+      });
+    };
+  });
+}
+
 $(document).ready(function () {
   const amenities = {};
 
@@ -23,26 +39,12 @@ $(document).ready(function () {
     }
   });
 
-  $.ajax({
-    type: "POST",
-    url: "http://localhost:5001/api/v1/places_search/",
-    data: "{}",
-    dataType: "json",
-    contentType: "application/json",
-    success: (data) => {
-      data.forEach(place => {
-        $('.places').append(`<article><div class="title_box"><h2>${place.name}</h2><div class="price_by_night">$${place.price_by_night}</div></div><div class="information"><div class="max_guest">${place.max_guest} Guests</div><div class="number_rooms">${place.number_rooms} Bedrooms</div><div class="number_bathrooms">${place.number_bathrooms} Bathrooms</div></div><div class="description">$${place.description}</div></article>`);
-      });
-    }
-  });
+  getPlaces({});
 
   $('button').click(function () {
     const amenityKeys = Object.values(amenities);
     const dict = {};
     dict.amenities = amenityKeys;
-    $.post("http://localhost:5001/api/v1/places_search/", dict,
-      function (data, textStatus) {
-        console.log(data);
-      });
+    getPlaces(dict);
   });
 });
