@@ -1,13 +1,17 @@
 $(document).ready(function () {
-  let amenities = {};
+  const amenities = {};
 
-  $('.amenities .popover input').change(() => {
-    if ($(this).checked) {
-      amenities[$(this).attr("data-name")] = $(this).attr('data-id');
-    } else if ($(this).checked) {
+  $('.amenities .popover input').click(function () {
+    if ($(this).is(':checked')) {
+      amenities[$(this).attr('data-name')] = $(this).attr('data-id');
+    } else {
       delete amenities[$(this).attr('data-name')];
     }
-    let names = Object.keys(amenities);
-    if (names.length > 0) {$('.amenities h4').text(names).sort();}
+    const names = Object.keys(amenities);
+    if (names.length > 0) {
+      $('.amenities h4').text(names).sort();
+    } else {
+      $('.amenities h4').text('');
+    }
   });
 });
