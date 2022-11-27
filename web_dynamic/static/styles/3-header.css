@@ -1,4 +1,7 @@
 header {
+    display: flex;
+    align-items: center;
+    justify-content: right;
     height: 70px; 
     width: 100%;
     border-bottom: 1px solid #CCCCCC;
@@ -7,15 +10,13 @@ header {
     background-position: 20px center;
     flex-shrink: 0;
 }
+div#api_status.available {
+    background-color: #ff545f;
+}
 #api_status {
-	float: right;
 	margin-right: 30px;
-	height: 40px;
+       	height: 40px;
 	width: 40px;
 	border-radius: 50%;
 	background-color: #cccccc;
-}
-
-.available {
-    background-color: #ff545f;
 }

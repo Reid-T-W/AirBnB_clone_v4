@@ -15,16 +15,23 @@ $(document).ready(function () {
     }
   });
 
-  fetch('http://localhost:5001/api/v1/status/')
-  .then((response) => response.json()).then(data => {
-    if (data.status === "OK") {
-      $('#api_status').addClass('available');
-      // if ($('#api_status').hasClass('available')) {
-      //   console.log('yes it does');
-      // }
+  $.get('http://localhost:5001/api/v1/status/', function (data, textStatus) {
+    if (data.status === 'OK') {
+      $('div#api_status').addClass('available');
     } else {
-      $('#api_status').removeClass('available');
+      $('div#api_status').removeClass('available');
     }
-    // console.log(data);
   });
 });
+// .then((response) => response.json()).then(data => {
+// if (data.status === "OK") {
+// $('#api_status').addClass('available');
+// if ($('#api_status').hasClass('available')) {
+//   console.log('yes it does');
+// }
+// } else {
+// $('#api_status').removeClass('available');
+// }
+// console.log(data);
+// });
+// });
