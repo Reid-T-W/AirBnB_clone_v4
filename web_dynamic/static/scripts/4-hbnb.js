@@ -35,4 +35,14 @@ $(document).ready(function () {
       });
     }
   });
+
+  $('button').click(function () {
+    const amenityKeys = Object.values(amenities);
+    const dict = {};
+    dict.amenities = amenityKeys;
+    $.post("http://localhost:5001/api/v1/places_search/", dict,
+      function (data, textStatus) {
+        console.log(data);
+      });
+  });
 });
