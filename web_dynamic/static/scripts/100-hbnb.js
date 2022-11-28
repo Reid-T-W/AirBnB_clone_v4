@@ -1,19 +1,19 @@
-function getPlaces (amenities) {
+function getPlaces (data) {
   // Gets places by amenities
   $.ajax({
     type: "POST",
     url: "http://localhost:5001/api/v1/places_search/",
-    data: JSON.stringify(amenities),
+    data: JSON.stringify(data),
     dataType: "json",
     contentType: "application/json",
     success: (data) => {
-      console.log(data);
       data.forEach(place => {
         $('.places').append(`<article><div class="title_box"><h2>${place.name}</h2><div class="price_by_night">$${place.price_by_night}</div></div><div class="information"><div class="max_guest">${place.max_guest} Guests</div><div class="number_rooms">${place.number_rooms} Bedrooms</div><div class="number_bathrooms">${place.number_bathrooms} Bathrooms</div></div><div class="description">$${place.description}</div></article>`);
       });
     }
   });
 }
+
 
 $(document).ready(function () {
   const locations = {};
@@ -79,9 +79,9 @@ $(document).ready(function () {
     const stateKeys = Object.values(locationStates);
     const cityKeys = Object.values(locationCities);
     const dict = {};
-    const dict_states = {};
-    const dict_cities = {};
     dict.amenities = amenityKeys;
+    dict.states = stateKeys;
+    dict.cities = cityKeys;
     getPlaces(dict);
   });
 });

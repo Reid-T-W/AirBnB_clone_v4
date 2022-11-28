@@ -1,9 +1,9 @@
-function getPlaces(amenities) {
+function getPlaces(data) {
   // Gets places by amenities
   $.ajax({
     type: "POST",
     url: "http://localhost:5001/api/v1/places_search/",
-    data: JSON.stringify(amenities),
+    data: JSON.stringify(data),
     dataType: "json",
     contentType: "application/json",
     success: (data) => {
